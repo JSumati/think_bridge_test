@@ -1,16 +1,18 @@
 from django.shortcuts import render
+from .models import inventory
 
 
-def listInventory():
+def list_inventory():
+    inventories = inventory.objects.all()
+    return inventories
+
+def show_inventory():
     pass
 
-def showInventory():
+def add_inventory():
     pass
 
-def addInventory():
-    pass
-
-def deleteInventory():
+def delete_inventory():
     pass
 
 
