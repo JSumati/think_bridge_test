@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 def list_inventory(request):
     inventories = inventory.objects.all()
-    return render('inventory.html',{'inventories': inventories})
+    return render(request, 'inventory.html',{'inventories': inventories})
 
 def show_inventory():
     pass
