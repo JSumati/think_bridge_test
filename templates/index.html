@@ -7,20 +7,20 @@
         <title>Shop Bridge Inventory</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="{% static 'site.webmanifest' %}">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <!-- <link rel="manifest" href="{% static 'site.webmanifest' %}"> -->
+		<!-- <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico"> -->
 
 		<!-- CSS here -->
             <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
-            <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}"> -->
             <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
    </head>
 
@@ -41,10 +41,6 @@
                             <!--Nav Button  -->
                             <nav>                                                                                                
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-
-
-
-
                                     
                                         <div class="login_part_form">
                                             <div class="login_part_form_iner">
@@ -79,11 +75,6 @@
                                         </div>
                                     
 
-
-
-
-
-
                                     <button type="button" id="button1" onclick="getElementById('form').style.display = 'block'; style.display='none'" class="nav-item nav-link">Add Inventory</button>
                                     
                                 </div>
@@ -102,6 +93,11 @@
                                     <div class="single-product mb-60">
                                         <div class="product-img">
                                             <img alt="" src="{{ item.image.url}}"/>
+                                            <div class="new-product">
+                                                <form id="del_form" method="POST" action="{% url 'remove' item.id %}">{% csrf_token %} 
+                                                </form>
+                                                <span><a href="#" onclick="document.getElementById('del_form').submit();">Remove</a></span>
+                                            </div>
                                         </div>
                                         <div class="product-caption">
                                             <h4><a href="{% url 'show' item.id %}" target="_black">{{ item.name }}</a></h4>

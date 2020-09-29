@@ -12,8 +12,8 @@ def list_inventory(request):
 @api_view(['GET'])
 def show_inventory(request, id):
     if request.method == 'GET':
-        data = inventory.objects.filter(id = id)
-        return HttpResponse(data)
+        record = inventory.objects.filter(id = id)
+        return render(request, 'show.html',{'record': record})
 
 # @api_view(['POST'])
 def add_inventory(request):
@@ -22,8 +22,8 @@ def add_inventory(request):
         data.save()
         return redirect('/inventory')
 
-@api_view(['DELETE'])
+@api_view(['POST'])
 def delete_inventory(request, id):
-    if request.method == 'DELETE':
-        data = inventory.objects.filter(id = id).delete()
-        return HttpResponse(data)
+    # if request.method == 'DELETE':
+    data = inventory.objects.filter(id = id).delete()
+    return redirect('/inventory')
