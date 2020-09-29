@@ -9,16 +9,39 @@
     </head>
     <body>
         <div>
-            <button type="submit" name="button" id="button1">Add Inventory</button>
+            <div><button type="submit" name="button" id="button1" onclick="toggleForm()">Add Inventory</button></div>
+            <div>
+                <form method="POST" action="add" id="form" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    Name: <input type="text" name="name" ><br>
+                    Price: <input type="number" name="price"><br>
+                    Description: <input type="text" name="description"><br>
+                    <label for="img">Upload Image:</label>
+                    <input type="file" id="img" name="img" accept="image/*"><br>
+                    <button type="submit" name="submit" id="button2" onclick="toggleForm()">Submit</button>
+                </form>
+            </div>
+        </div>
 
-            <form method="POST" action="/add" id="form">
-                <input type="text" name="name" >
-                <input type="number" name="price">
-                <input type="text" name="description">
-                <label>Upload Image:</label>
-                <input type="file" name="image">
-                <button type="submit" name="submit" id="button2">Submit</button>
-            </form>
+        <div>
+            <table>
+                <tr>
+                    <!-- <th></th> -->
+                    <th>Inventory Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                </tr>
+                {% for item in inventories %}
+                <tr> 
+                    <!-- <td>{{ item. }}</td> -->
+                    <!-- <a href="{{ object.myimage.url }}"><img alt="" src="{{ object.myimage.thumbnail.url }}"/></a> -->
+                    
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.description }}</td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
         <script src="{% static 'js/main.js' %}"></script>
     </body>

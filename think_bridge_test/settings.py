@@ -23,9 +23,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')p72+@2z6g*u$6*=@sdib742hcofqu3%0_m&%_2^f7*q0^oaf('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = '*'
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8081',
+)
 
 
 # Application definition
@@ -37,12 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shop_bridge'
+    'shop_bridge', #Shop Bridge App for Inventories
+    'stdimage', #stdImage for Image file 
+    'rest_framework', #Django Rest Framework
+    'corsheaders',  #CORS
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -128,5 +137,9 @@ STATIC_URL = '/static/'
 
 # Add these new lines
 
-STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'), )
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static/'), )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media to store images of inventories
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
+MEDIA_URL = '/media/'

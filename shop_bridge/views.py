@@ -1,20 +1,29 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import inventory
 from django.http import HttpResponse
+from rest_framework.decorators import api_view
 
 
+@api_view(['GET'])
 def list_inventory(request):
     inventories = inventory.objects.all()
-    return render(request, 'inventory.html',{'inventories': inventories})
+    return render(request, 'index.html',{'inventories': inventories})
 
-def show_inventory():
-    pass
+@api_view(['GET'])
+def show_inventory(request, id):
+    if request.method == 'GET':
+        data = inventory.objects.filter(id = id)
+        return HttpResponse(data)
 
+# @api_view(['POST'])
 def add_inventory(request):
-    return HttpResponse(request)
+    if request.method == 'POST':
+        data = inventory(name = request.POST.get('name'), price = request.POST.get('price'), description = request.POST.get('description'), image = request.FILES['img'])
+        data.save()
+        return redirect('/inventory')
 
-def delete_inventory():
-    pass
-
-
-
+@api_view(['DELETE'])
+def delete_inventory(request, id):
+    if request.method == 'DELETE':
+        data = inventory.objects.filter(id = id).delete()
+        return HttpResponse(data)
